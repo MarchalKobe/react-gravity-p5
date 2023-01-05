@@ -1,0 +1,29 @@
+name: "Danger CI: Workflow"
+
+on: [pull_request]
+
+jobs:
+  danger:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: "18"
+
+      - name: "Danger CI: Backup yarn.lock"
+        run: "cp project/yarn.lock project/yarn.lock.back"
+
+      - name: "Danger CI: Install"
+        run: "yarn add --cwd=project @bitsoflove/danger"
+        env:
+          NPM_GITHUB_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+
+      - name: "Danger CI: Restore yarn.lock"
+        run: "rm project/yarn.lock && mv project/yarn.lock.back project/yarn.lock"
+
+      - name: "Danger CI"
+        run: "mv dangerfile.js project/dangerfile.js && cd project && yarn danger ci"
+        env:
+          DEBUG: "*"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

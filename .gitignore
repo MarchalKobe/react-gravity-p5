@@ -1,0 +1,7 @@
+# OSX
+.DS_Store
+
+# Editor
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json

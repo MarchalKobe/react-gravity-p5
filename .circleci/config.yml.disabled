@@ -1,0 +1,96 @@
+version: 2.1
+jobs:
+  build:
+    docker:
+      - image: node:12
+    working_directory: /tmp/bol/app
+    steps:
+      - checkout
+
+      - run:
+          name: Create artifact directory if not exist
+          command: |
+            if [ ! -d /tmp/bol/artifacts ]; then
+              mkdir -p /tmp/bol/artifacts
+            fi
+
+      - restore_cache:
+          keys:
+            - vendors-v1-{{ checksum "project/yarn.lock" }}
+            - vendors-v1-
+
+      - run:
+          name: Install dependencies
+          command: |
+            yarn --cwd $CIRCLE_WORKING_DIRECTORY/project install
+
+      - save_cache:
+          name: Saving vendor cache
+          key: vendors-v1-{{ checksum "project/yarn.lock" }}
+          paths:
+            - project/node_modules
+
+      - run:
+          name: Build app
+          command: |
+            yarn --cwd $CIRCLE_WORKING_DIRECTORY/project build
+            # yarn --cwd $CIRCLE_WORKING_DIRECTORY/project pre-export
+            yarn --cwd $CIRCLE_WORKING_DIRECTORY/project export
+            # yarn --cwd $CIRCLE_WORKING_DIRECTORY/project post-export
+
+      - run:
+          name: Build storybook
+          command: |
+            STORYBOOK_STATIC_DIR="/storybook/" yarn --cwd $CIRCLE_WORKING_DIRECTORY/project build:storybook
+
+      - store_artifacts:
+          path: /tmp/bol/artifacts
+
+      - persist_to_workspace:
+          root: /tmp/bol/app
+          paths:
+            - .circleci
+            - project/out
+            - project/storybook-static
+  deploy:
+    docker:
+      - image: registry.gitlab.com/bitsoflove/cli-utility:latest
+        auth:
+          username: botoflove
+          password: $GITLAB_ACCESS_TOKEN
+        user: utility
+    working_directory: /tmp/bol/app
+    steps:
+      - attach_workspace:
+          at: .
+
+      - run:
+          name: "Prepare storybook"
+          command: |
+            ( [ "${CIRCLE_BRANCH}" != "develop" ] && [ "${CIRCLE_BRANCH}" != "acceptance" ] && [[ "${CIRCLE_BRANCH}" != "feature/"* ]] ) && echo "I don't need a story book!!" && exit 0
+
+            [ -d "$CIRCLE_WORKING_DIRECTORY/project/storybook-static" ] && mv $CIRCLE_WORKING_DIRECTORY/project/storybook-static $CIRCLE_WORKING_DIRECTORY/project/out/storybook || exit 0
+      - run:
+          name: "Deploy"
+          command: |
+            ##
+            # UPDATE THIS VALUE !!
+            ##
+            BOL_DEPLOY_ID=${BOL_DEPLOY_ID:-000000-8e7b-36a2-0001}
+
+            if [ "${CIRCLE_BRANCH}" == "develop" ]; then
+              echo "Deploying to develop."
+              aws --region eu-central-1 s3 sync $CIRCLE_WORKING_DIRECTORY/project/out s3://bitsoflove-develop/${BOL_DEPLOY_ID} --delete --acl public-read
+            fi
+workflows:
+  main:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - master
+                - develop
+      - deploy:
+          requires:
+            - build

@@ -1,0 +1,10 @@
+version: 2
+updates:
+  - package-ecosystem: "npm"
+    directory: ${{secrets.DEPENDABOT_DIRECTORY:-foo}}
+    allow:
+      - dependency-type: "production"
+    schedule:
+      interval: "weekly"
+    reviewers:
+      - "jeroenverfallie"

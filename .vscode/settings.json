@@ -1,0 +1,20 @@
+{
+  "css.validate": false,
+
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+
+  "eslint.workingDirectories": [
+    "./project"
+  ],
+
+  "javascript.format.enable": false,
+
+  "stylelint.configBasedir": "./project",
+
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.format.enable": false,
+  "typescript.tsdk": "./project/node_modules/typescript/lib"
+}

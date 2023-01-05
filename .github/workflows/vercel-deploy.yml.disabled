@@ -1,0 +1,46 @@
+name: deploy to vercel
+
+on:
+  push:
+    branches:
+      - develop
+      - acceptance
+      - production
+  pull_request:
+    branches:
+      - develop
+      - feature/**
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: bitsoflove/vercel-action@v20.0.1
+        id: vercel-action-preview
+        if: ${{ github.ref != 'refs/heads/production' }}
+        env:
+          NPM_GITHUB_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-args:
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+          scope: bitsoflove
+          github-comment: false
+          working-directory: ./
+      - uses: bitsoflove/vercel-action@v20.0.1
+        id: vercel-action-production
+        if: ${{ github.ref == 'refs/heads/production' }}
+        env:
+          NPM_GITHUB_TOKEN: ${{ secrets.NPM_GITHUB_TOKEN }}
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          vercel-token: ${{ secrets.VERCEL_TOKEN }}
+          vercel-args: "--prod "
+          vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
+          vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+          scope: bitsoflove
+          github-comment: false
+          working-directory: ./
