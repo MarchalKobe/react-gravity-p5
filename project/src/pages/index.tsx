@@ -13,6 +13,12 @@ export default function Home() {
         <li>
           <Link href="/buttons">Buttons</Link>
         </li>
+        <li>
+          <Link href="/buttons-minified">Buttons minified</Link>
+        </li>
+        <li>
+          <Link href="/coins">Coins</Link>
+        </li>
       </ul>
     </div>
   );

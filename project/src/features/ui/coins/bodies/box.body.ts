@@ -16,6 +16,7 @@ export class Box {
       friction: 0.3,
       restitution: 0.6,
     };
+
     this.body = Bodies.rectangle(this.x, this.y, width, height, options);
     World.add(this.world, this.body);
   }

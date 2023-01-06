@@ -1,5 +1,5 @@
-import { Buttons } from '~/features/ui';
+import { Buttons } from '~/features/ui/buttons/buttons.component';
 
-export default function Home() {
+export default function ButtonsPage() {
   return <Buttons />;
 }

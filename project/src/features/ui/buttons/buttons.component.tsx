@@ -16,34 +16,19 @@ let engine: Engine;
 let world: World;
 const buttons: Button[] = [];
 
-let ground: Ground;
-
 export const Buttons: FunctionComponent<ButtonsProps> = ({}) => {
   const setup = (p5: p5Types, canvasParentRef: Element) => {
     p5.createCanvas(600, 600);
     engine = Engine.create();
     world = engine.world;
 
-    ground = new Ground(world, p5);
+    new Ground(world, p5);
 
-    buttonsConfig.map(
-      ({ x, y, width, height, label, color, backgroundColor, onClick }) => {
-        buttons.push(
-          new Button(
-            world,
-            p5,
-            x,
-            y,
-            width,
-            height,
-            label,
-            color,
-            backgroundColor,
-            onClick,
-          ),
-        );
-      },
-    );
+    buttonsConfig.map(({ x, y, width, height, label, style, onClick }) => {
+      buttons.push(
+        new Button(world, p5, x, y, width, height, label, style, onClick),
+      );
+    });
   };
 
   const draw = (p5: p5Types) => {
@@ -52,7 +37,6 @@ export const Buttons: FunctionComponent<ButtonsProps> = ({}) => {
     buttons.map((button) => {
       button.show();
     });
-    ground.show();
   };
 
   return <Sketch setup={setup} draw={draw} />;
