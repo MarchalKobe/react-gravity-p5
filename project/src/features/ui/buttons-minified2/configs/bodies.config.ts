@@ -1,4 +1,7 @@
-import { BodyProps } from '~/shared/gravity1/types';
+import { BodyProps } from '~/shared/gravity2/types';
+
+const buttonStyle =
+  'flex items-center justify-center gap-4 font-medium hover:opacity-80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-survey-color-7 transition-opacity';
 
 export const bodiesConfig: BodyProps = {
   canvasWidth: 1360,
@@ -13,7 +16,6 @@ export const bodiesConfig: BodyProps = {
         y: 604 + 50,
         width: 1360,
         height: 100,
-        label: 'GROUND',
       },
     },
     {
@@ -24,7 +26,6 @@ export const bodiesConfig: BodyProps = {
         y: 604 / 2,
         width: 100,
         height: 604,
-        label: 'SIDELEFT',
       },
     },
     {
@@ -35,7 +36,6 @@ export const bodiesConfig: BodyProps = {
         y: 604 / 2,
         width: 100,
         height: 604,
-        label: 'SIDERIGHT',
       },
     },
     {
@@ -47,8 +47,7 @@ export const bodiesConfig: BodyProps = {
         height: 60,
         label: 'IEMAND OP INTERNET',
         borderRadius: 24,
-        className:
-          'text-survey-color-7 bg-survey-color-2 border-2 border-survey-color-7',
+        className: `${buttonStyle} text-survey-color-7 bg-survey-color-2 border-2 border-survey-color-7`,
         onClick: () => {
           console.log('Clicked on button IEMAND OP INTERNET');
         },
@@ -63,8 +62,7 @@ export const bodiesConfig: BodyProps = {
         height: 70,
         label: 'EEN HULPORGANISATIE',
         borderRadius: 24,
-        className:
-          'text-survey-color-7 bg-survey-color-1 border-2 border-survey-color-7',
+        className: `${buttonStyle} text-survey-color-7 bg-survey-color-1 border-2 border-survey-color-7`,
         onClick: () => {
           console.log('Clicked on button EEN HULPORGANISATIE');
         },
@@ -79,8 +77,7 @@ export const bodiesConfig: BodyProps = {
         height: 70,
         label: 'BEGELEIDER VAN MIJN HOBBY',
         borderRadius: 24,
-        className:
-          'text-survey-color-7 bg-survey-color-6 border-2 border-survey-color-7',
+        className: `${buttonStyle} text-survey-color-7 bg-survey-color-6 border-2 border-survey-color-7`,
         onClick: () => {
           console.log('Clicked on button BEGELEIDER VAN MIJN HOBBY');
         },
@@ -95,8 +92,7 @@ export const bodiesConfig: BodyProps = {
         height: 70,
         label: 'VRIENDEN',
         borderRadius: 24,
-        className:
-          'text-survey-color-7 bg-survey-color-5 border-2 border-survey-color-7',
+        className: `${buttonStyle} text-survey-color-7 bg-survey-color-5 border-2 border-survey-color-7`,
         onClick: () => {
           console.log('Clicked on button VRIENDEN');
         },
@@ -111,8 +107,7 @@ export const bodiesConfig: BodyProps = {
         height: 70,
         label: 'MIJN LEERKRACHT',
         borderRadius: 24,
-        className:
-          'text-survey-color-7 bg-survey-color-3 border-2 border-survey-color-7',
+        className: `${buttonStyle} text-survey-color-7 bg-survey-color-3 border-2 border-survey-color-7`,
         onClick: () => {
           console.log('Clicked on button MIJN LEERKRACHT');
         },
@@ -127,8 +122,7 @@ export const bodiesConfig: BodyProps = {
         height: 70,
         label: 'IEMAND VAN DE FAMILIE',
         borderRadius: 24,
-        className:
-          'text-survey-color-7 bg-survey-color-2 border-2 border-survey-color-7',
+        className: `${buttonStyle} text-survey-color-7 bg-survey-color-2 border-2 border-survey-color-7`,
         onClick: () => {
           console.log('Clicked on button IEMAND VAN DE FAMILIE');
         },
@@ -143,8 +137,7 @@ export const bodiesConfig: BodyProps = {
         height: 70,
         label: 'NIEMAND',
         borderRadius: 24,
-        className:
-          'text-survey-color-7 bg-survey-color-5 border-2 border-survey-color-7',
+        className: `${buttonStyle} text-survey-color-7 bg-survey-color-5 border-2 border-survey-color-7`,
         onClick: () => {
           console.log('Clicked on button NIEMAND');
         },
@@ -159,8 +152,7 @@ export const bodiesConfig: BodyProps = {
         height: 70,
         label: 'MIJN OUDERS',
         borderRadius: 24,
-        className:
-          'text-survey-color-7 bg-survey-color-6 border-2 border-survey-color-7',
+        className: `${buttonStyle} text-survey-color-7 bg-survey-color-6 border-2 border-survey-color-7`,
         onClick: () => {
           console.log('Clicked on button MIJN OUDERS');
         },
@@ -175,8 +167,7 @@ export const bodiesConfig: BodyProps = {
         height: 70,
         label: 'MIJN GROOTOUDERS',
         borderRadius: 24,
-        className:
-          'text-survey-color-7 bg-survey-color-1 border-2 border-survey-color-7',
+        className: `${buttonStyle} text-survey-color-7 bg-survey-color-1 border-2 border-survey-color-7`,
         onClick: () => {
           console.log('Clicked on button MIJN GROOTOUDERS');
         },
@@ -188,7 +179,6 @@ export const bodiesConfig: BodyProps = {
         x: 1020,
         y: 155,
         radius: 20,
-        label: 'CIRCLE1',
         className: 'border-2 border-survey-color-7 bg-survey-color-4',
       },
     },
@@ -198,7 +188,6 @@ export const bodiesConfig: BodyProps = {
         x: 950,
         y: 300,
         radius: 30,
-        label: 'CIRCLE2',
         className: 'border-2 border-survey-color-7 bg-survey-color-4',
       },
     },
@@ -209,7 +198,6 @@ export const bodiesConfig: BodyProps = {
         y: 525,
         width: 50,
         height: 50,
-        label: 'BOX1',
         className: 'border-2 border-survey-color-7 bg-survey-color-4',
       },
     },

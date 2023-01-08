@@ -17,6 +17,9 @@ export default function Home() {
           <Link href="/buttons-minified">Buttons minified</Link>
         </li>
         <li>
+          <Link href="/buttons-minified2">Buttons minified 2</Link>
+        </li>
+        <li>
           <Link href="/coins">Coins</Link>
         </li>
       </ul>

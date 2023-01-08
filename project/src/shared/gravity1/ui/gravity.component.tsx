@@ -90,8 +90,6 @@ export const GravityComponent: FunctionComponent<GravityProps> = ({
         if (!currentBody) return <></>;
         const BodyComponent = bodyComponentTypes[type];
 
-        console.log(properties.label);
-
         return (
           <BodyComponent
             key={properties.label}
