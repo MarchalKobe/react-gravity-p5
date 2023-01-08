@@ -2,27 +2,24 @@ import { Body } from 'matter-js';
 import { ButtonHTMLAttributes, FunctionComponent } from 'react';
 import { twMerge } from 'tailwind-merge';
 
+import { ButtonBodyProps } from '../../bodies/button.body';
+
 export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   body: Body;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  label: string;
-  className: string;
-  onClick: () => void;
+  properties: ButtonBodyProps;
 }
 
 export const ButtonComponent: FunctionComponent<ButtonProps> = ({
   body,
-  x,
-  y,
-  width,
-  height,
-  label,
-  className,
+  properties,
   ...props
 }) => {
+  const { width, height, borderRadius = 0, label, className } = properties;
+
+  const radius = Array.isArray(borderRadius)
+    ? `${borderRadius.join('px ')}px`
+    : `${borderRadius}px`;
+
   return (
     <button
       {...props}
@@ -31,6 +28,7 @@ export const ButtonComponent: FunctionComponent<ButtonProps> = ({
         className,
       )}
       style={{
+        borderRadius: radius,
         left: `${body.position.x - width / 2}px`,
         top: `${body.position.y - height / 2}px`,
         width: `${width}px`,

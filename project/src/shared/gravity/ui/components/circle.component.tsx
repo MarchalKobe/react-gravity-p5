@@ -2,23 +2,20 @@ import { Body } from 'matter-js';
 import { FunctionComponent, HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
+import { CircleBodyProps } from '../../bodies/circle.body';
+
 export interface CircleProps extends HTMLAttributes<HTMLDivElement> {
   body: Body;
-  x: number;
-  y: number;
-  radius: number;
-  label: string;
-  className: string;
+  properties: CircleBodyProps;
 }
 
 export const CircleComponent: FunctionComponent<CircleProps> = ({
   body,
-  x,
-  y,
-  radius,
-  className,
+  properties,
   ...props
 }) => {
+  const { radius, className } = properties;
+
   return (
     <div
       {...props}

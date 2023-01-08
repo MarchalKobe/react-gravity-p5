@@ -2,25 +2,20 @@ import { Body } from 'matter-js';
 import { FunctionComponent, HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
+import { BoxBodyProps } from '../../bodies/box.body';
+
 export interface BoxProps extends HTMLAttributes<HTMLDivElement> {
   body: Body;
-  x: number;
-  y: number;
-  width: number;
-  height: number;
-  label: string;
-  className: string;
+  properties: BoxBodyProps;
 }
 
 export const BoxComponent: FunctionComponent<BoxProps> = ({
   body,
-  x,
-  y,
-  width,
-  height,
-  className,
+  properties,
   ...props
 }) => {
+  const { width, height, className } = properties;
+
   return (
     <div
       {...props}
