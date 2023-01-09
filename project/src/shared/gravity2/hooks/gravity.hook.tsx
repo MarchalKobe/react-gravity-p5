@@ -1,4 +1,13 @@
-import { Engine, Events, Render, Runner, World } from 'matter-js';
+import {
+  Composite,
+  Engine,
+  Events,
+  Mouse,
+  MouseConstraint,
+  Render,
+  Runner,
+  World,
+} from 'matter-js';
 import { MutableRefObject, useEffect } from 'react';
 
 import { BodyProps, bodyTypes } from '../types';
@@ -14,8 +23,11 @@ let render: Render;
 let runner: Runner;
 let bodies: any[]; // TODO
 
+let loopTimeout: NodeJS.Timeout;
+
 export const useGravity = ({ container, config }: GravityProps) => {
-  const { canvasWidth, canvasHeight, timeoutSeconds } = config;
+  const { canvasWidth, canvasHeight, timeoutSeconds, hasMouseInteraction } =
+    config;
 
   useEffect(() => {
     const update = () => {
@@ -44,13 +56,21 @@ export const useGravity = ({ container, config }: GravityProps) => {
         bodies.push(new BodyType(world, container, properties));
       });
 
+      if (hasMouseInteraction) {
+        const mouse = Mouse.create(container.current);
+        const mouseConstraint = MouseConstraint.create(engine, {
+          mouse,
+        });
+        Composite.add(engine.world, mouseConstraint);
+      }
+
       // * For configuring the properties
-      // Render.run(render);
       runner = Runner.run(engine);
+      // Render.run(render);
       Events.on(engine, 'afterUpdate', update);
 
       if (timeoutSeconds) {
-        setTimeout(() => {
+        loopTimeout = setTimeout(() => {
           Runner.stop(runner);
         }, timeoutSeconds);
       }
@@ -61,13 +81,21 @@ export const useGravity = ({ container, config }: GravityProps) => {
       Engine.clear(engine);
       Render.stop(render);
       Runner.stop(runner);
+      clearTimeout(loopTimeout);
       render.canvas.remove();
 
       bodies.map((body) => {
         body.destroy();
       });
     };
-  }, [container, config, canvasWidth, canvasHeight, timeoutSeconds]);
+  }, [
+    container,
+    config,
+    canvasWidth,
+    canvasHeight,
+    timeoutSeconds,
+    hasMouseInteraction,
+  ]);
 
   return null;
 };

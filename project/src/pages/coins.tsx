@@ -1,4 +1,4 @@
-import { Coins } from '~/features/ui/coins/coins-svg-back.component';
+import { Coins } from '~/features/ui/coins/coins.component';
 
 export default function CoinsPage() {
   return <Coins />;

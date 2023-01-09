@@ -32,9 +32,15 @@ if (typeof document !== 'undefined') {
     return Svg.pathToVertices(path, 30);
   });
 
+  console.log(JSON.stringify(vertexSets));
+
+  // TODO: Temporary fix?
+  const xOffset = 5;
+  const yOffset = 77;
+
   const container = Bodies.fromVertices(
-    render.options.width! / 2,
-    render.options.height! / 2,
+    render.options.width! / 2 + xOffset,
+    render.options.height! / 2 + yOffset,
     vertexSets,
     {
       isStatic: true,
