@@ -13,7 +13,7 @@ export const Coins: FunctionComponent<CoinsProps> = ({}) => {
   return (
     <div
       ref={containerRef}
-      className="relative w-[1360px] h-[604px] bg-survey-color-4 overflow-hidden border-2 border-survey-color-7 rounded-[40px] m-10"
+      className="relative w-[1360px] h-[604px] bg-survey-color-7 overflow-hidden border-2 border-survey-color-7 rounded-[40px] m-10"
     />
   );
 };

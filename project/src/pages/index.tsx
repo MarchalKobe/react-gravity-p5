@@ -22,6 +22,9 @@ export default function Home() {
         <li>
           <Link href="/coins">Coins</Link>
         </li>
+        <li>
+          <Link href="/coins2">Coins 2</Link>
+        </li>
       </ul>
     </div>
   );

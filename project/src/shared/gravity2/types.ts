@@ -7,9 +7,11 @@ export const bodyTypes = {
   box: Box,
   coinsContainer: CoinsContainer,
   coin: Coin,
-};
+} as const;
 
 type BodyTypes = keyof typeof bodyTypes;
+// TODO: Get from bodyTypes values
+export type Bodies = Boundary | Button | Circle | Box | CoinsContainer | Coin;
 
 export type BodyProps = {
   canvasWidth: number;

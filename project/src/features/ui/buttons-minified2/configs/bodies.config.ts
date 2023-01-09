@@ -6,7 +6,7 @@ const buttonStyle =
 export const bodiesConfig: BodyProps = {
   canvasWidth: 1360,
   canvasHeight: 604,
-  timeoutSeconds: 2700,
+  timeoutSeconds: 2450,
   bodies: [
     {
       // GROUND

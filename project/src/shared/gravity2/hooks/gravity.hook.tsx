@@ -5,12 +5,11 @@ import {
   Mouse,
   MouseConstraint,
   Render,
-  Runner,
   World,
 } from 'matter-js';
 import { MutableRefObject, useEffect } from 'react';
 
-import { BodyProps, bodyTypes } from '../types';
+import { Bodies, BodyProps, bodyTypes } from '../types';
 
 export interface GravityProps {
   container: MutableRefObject<HTMLDivElement>;
@@ -20,10 +19,11 @@ export interface GravityProps {
 let engine: Engine;
 let world: World;
 let render: Render;
-let runner: Runner;
-let bodies: any[]; // TODO
+let bodies: Bodies[];
 
 let loopTimeout: NodeJS.Timeout;
+let loopInterval: NodeJS.Timeout;
+const loopSpeed = 1000 / 60;
 
 export const useGravity = ({ container, config }: GravityProps) => {
   const { canvasWidth, canvasHeight, timeoutSeconds, hasMouseInteraction } =
@@ -34,6 +34,10 @@ export const useGravity = ({ container, config }: GravityProps) => {
       bodies.map((body) => {
         body.show();
       });
+    };
+
+    const loop = () => {
+      Engine.update(engine);
     };
 
     if (typeof document !== 'undefined') {
@@ -65,13 +69,13 @@ export const useGravity = ({ container, config }: GravityProps) => {
       }
 
       // * For configuring the properties
-      runner = Runner.run(engine);
-      // Render.run(render);
+      Render.run(render);
+      loopInterval = setInterval(loop, loopSpeed);
       Events.on(engine, 'afterUpdate', update);
 
       if (timeoutSeconds) {
         loopTimeout = setTimeout(() => {
-          Runner.stop(runner);
+          clearInterval(loopInterval);
         }, timeoutSeconds);
       }
     }
@@ -80,7 +84,7 @@ export const useGravity = ({ container, config }: GravityProps) => {
       World.clear(world, false);
       Engine.clear(engine);
       Render.stop(render);
-      Runner.stop(runner);
+      clearInterval(loopInterval);
       clearTimeout(loopTimeout);
       render.canvas.remove();
 

@@ -14,6 +14,15 @@ export const bodiesConfig: BodyProps = {
       },
     },
     {
+      type: 'boundary',
+      properties: {
+        x: 1360 / 2,
+        y: 604 - 100,
+        width: 1360,
+        height: 100,
+      },
+    },
+    {
       type: 'coin',
       properties: {
         x: 1360 / 2 + 100,
