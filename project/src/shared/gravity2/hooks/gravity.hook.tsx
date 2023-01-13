@@ -1,11 +1,11 @@
 import {
-  Body,
   Composite,
   Engine,
   Events,
   Mouse,
   MouseConstraint,
   Render,
+  Runner,
   World,
 } from 'matter-js';
 import { MutableRefObject, useEffect } from 'react';
@@ -21,9 +21,10 @@ let engine: Engine;
 let world: World;
 let render: Render;
 let bodies: Bodies[];
+let runner: Runner;
 
 let loopTimeout: NodeJS.Timeout;
-let loopInterval: NodeJS.Timeout;
+// let loopInterval: NodeJS.Timeout;
 
 const delta = 1000 / 60;
 const subSteps = 3;
@@ -73,47 +74,22 @@ export const useGravity = ({ container, config }: GravityProps) => {
       }
 
       // * For configuring the properties
-      Render.run(render);
+      // Render.run(render);
+      runner = Runner.run(engine);
       // loopInterval = setInterval(loop, loopSpeed);
       Events.on(engine, 'afterUpdate', update);
 
-      const limitMaxSpeed = () => {
-        const maxSpeed = 0.1;
-
-        world.bodies.map((body) => {
-          console.log(body.label);
-
-          console.log('test');
-
-          if (body.velocity.x > maxSpeed) {
-            Body.setVelocity(body, { x: maxSpeed, y: body.velocity.y });
-          }
-
-          if (body.velocity.x < -maxSpeed) {
-            Body.setVelocity(body, { x: -maxSpeed, y: body.velocity.y });
-          }
-
-          if (body.velocity.y > maxSpeed) {
-            Body.setVelocity(body, { x: body.velocity.x, y: maxSpeed });
-          }
-
-          if (body.velocity.y < -maxSpeed) {
-            Body.setVelocity(body, { x: -body.velocity.x, y: -maxSpeed });
-          }
-        });
-      };
-      // Events.on(engine, 'beforeUpdate', limitMaxSpeed);
-
-      (function run() {
-        window.requestAnimationFrame(run);
-        for (let i = 0; i < subSteps; i += 1) {
-          Engine.update(engine, subDelta);
-        }
-      })();
+      // (function run() {
+      //   window.requestAnimationFrame(run);
+      //   for (let i = 0; i < subSteps; i += 1) {
+      //     Engine.update(engine, subDelta);
+      //   }
+      // })();
 
       if (timeoutSeconds) {
         loopTimeout = setTimeout(() => {
-          clearInterval(loopInterval);
+          Runner.stop(runner);
+          // clearInterval(loopInterval);
         }, timeoutSeconds);
       }
     }
@@ -122,7 +98,8 @@ export const useGravity = ({ container, config }: GravityProps) => {
       World.clear(world, false);
       Engine.clear(engine);
       Render.stop(render);
-      clearInterval(loopInterval);
+      Runner.stop(runner);
+      // clearInterval(loopInterval);
       clearTimeout(loopTimeout);
       render.canvas.remove();
 
