@@ -1,5 +1,4 @@
 import {
-  Body,
   Composite,
   Engine,
   Events,
@@ -24,10 +23,7 @@ let bodies: Bodies[];
 
 let loopTimeout: NodeJS.Timeout;
 let loopInterval: NodeJS.Timeout;
-
-const delta = 1000 / 60;
-const subSteps = 3;
-const subDelta = delta / subSteps;
+const loopSpeed = 1000 / 60;
 
 export const useGravity = ({ container, config }: GravityProps) => {
   const { canvasWidth, canvasHeight, timeoutSeconds, hasMouseInteraction } =
@@ -40,9 +36,9 @@ export const useGravity = ({ container, config }: GravityProps) => {
       });
     };
 
-    // const loop = () => {
-    //   Engine.update(engine);
-    // };
+    const loop = () => {
+      Engine.update(engine);
+    };
 
     if (typeof document !== 'undefined') {
       bodies = [];
@@ -74,42 +70,8 @@ export const useGravity = ({ container, config }: GravityProps) => {
 
       // * For configuring the properties
       Render.run(render);
-      // loopInterval = setInterval(loop, loopSpeed);
+      loopInterval = setInterval(loop, loopSpeed);
       Events.on(engine, 'afterUpdate', update);
-
-      const limitMaxSpeed = () => {
-        const maxSpeed = 0.1;
-
-        world.bodies.map((body) => {
-          console.log(body.label);
-
-          console.log('test');
-
-          if (body.velocity.x > maxSpeed) {
-            Body.setVelocity(body, { x: maxSpeed, y: body.velocity.y });
-          }
-
-          if (body.velocity.x < -maxSpeed) {
-            Body.setVelocity(body, { x: -maxSpeed, y: body.velocity.y });
-          }
-
-          if (body.velocity.y > maxSpeed) {
-            Body.setVelocity(body, { x: body.velocity.x, y: maxSpeed });
-          }
-
-          if (body.velocity.y < -maxSpeed) {
-            Body.setVelocity(body, { x: -body.velocity.x, y: -maxSpeed });
-          }
-        });
-      };
-      // Events.on(engine, 'beforeUpdate', limitMaxSpeed);
-
-      (function run() {
-        window.requestAnimationFrame(run);
-        for (let i = 0; i < subSteps; i += 1) {
-          Engine.update(engine, subDelta);
-        }
-      })();
 
       if (timeoutSeconds) {
         loopTimeout = setTimeout(() => {

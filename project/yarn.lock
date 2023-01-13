@@ -2708,6 +2708,13 @@
   dependencies:
     "@types/react" "*"
 
+"@types/react-no-ssr@^1.1.3":
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/@types/react-no-ssr/-/react-no-ssr-1.1.3.tgz#895baced8f49e270289c8ad11be1a4a50328d243"
+  integrity sha512-uMR17qGISe0qTTiVFuRfatP+9plEe/Q0beQ47xy0OXatwb3Z2bEj3OW7FC+9PVqCYEsfR4b01LU9tXw2urzBzw==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react@*", "@types/react@18.0.26":
   version "18.0.26"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-18.0.26.tgz#8ad59fc01fef8eaf5c74f4ea392621749f0b7917"
@@ -3721,6 +3728,14 @@ babel-plugin-react-docgen@^4.2.1:
     lodash "^4.17.15"
     react-docgen "^5.0.0"
 
+babel-runtime@6.x.x:
+  version "6.26.0"
+  resolved "https://registry.yarnpkg.com/babel-runtime/-/babel-runtime-6.26.0.tgz#965c7058668e82b55d7bfe04ff2337bc8b5647fe"
+  integrity sha512-ITKNuq2wKlW1fJg9sSW52eepoYgZBggvOAHC0u/CYu/qxQ9EVzThCgR69BnSXLHjy2f7SY5zaQ4yt7H9ZVxY2g==
+  dependencies:
+    core-js "^2.4.0"
+    regenerator-runtime "^0.11.0"
+
 bail@^1.0.0:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/bail/-/bail-1.0.5.tgz#b6fa133404a392cbc1f8c4bf63f5953351e7a776"
@@ -4588,6 +4603,11 @@ core-js-pure@^3.8.1:
   version "3.20.3"
   resolved "https://registry.yarnpkg.com/core-js-pure/-/core-js-pure-3.20.3.tgz#6cc4f36da06c61d95254efc54024fe4797fd5d02"
   integrity sha512-Q2H6tQ5MtPtcC7f3HxJ48i4Q7T9ybPKgvWyuH7JXIoNa2pm0KuBnycsET/qw1SLLZYfbsbrZQNMeIOClb+6WIA==
+
+core-js@^2.4.0:
+  version "2.6.12"
+  resolved "https://registry.yarnpkg.com/core-js/-/core-js-2.6.12.tgz#d9333dfa7b065e347cc5682219d6f690859cc2ec"
+  integrity sha512-Kb2wC0fvsWfQrgk8HU5lW6U/Lcs8+9aaYcy4ZFc6DDlo4nZ7n70dEgE5rtR0oG6ufKDUnrwfWL1mXR5ljDatrQ==
 
 core-js@^3.0.4, core-js@^3.6.5, core-js@^3.8.2:
   version "3.15.1"
@@ -9166,6 +9186,13 @@ pkg-dir@^5.0.0:
   dependencies:
     find-up "^5.0.0"
 
+planck-js@^0.3.31:
+  version "0.3.31"
+  resolved "https://registry.yarnpkg.com/planck-js/-/planck-js-0.3.31.tgz#dc87a999f6d425633d7abd8c77078fcb5a9babd2"
+  integrity sha512-fwKYnL92pF2nXdMPeBq/Aipu+m8LztcEcNjdcrQm/sWKDR01Ej0g121KS1oO7NW23WnRzxw24a7V4KI2JlFpSg==
+  dependencies:
+    stage-js "^0.9.4"
+
 pnp-webpack-plugin@1.6.4:
   version "1.6.4"
   resolved "https://registry.yarnpkg.com/pnp-webpack-plugin/-/pnp-webpack-plugin-1.6.4.tgz#c9711ac4dc48a685dabafc86f8b6dd9f8df84149"
@@ -9719,6 +9746,13 @@ react-is@^16.13.1, react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-no-ssr@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-no-ssr/-/react-no-ssr-1.1.0.tgz#313b48d2e26020f969ed98e472f10481604e3cc8"
+  integrity sha512-3td8iPIEFKWXOJ3Ar5xURvZAsv/aIlngJLBH6fP5QC3WhsfuO2pn7WQR0ZlkTE0puWCL0RDEvXtOfAg4qMp+xA==
+  dependencies:
+    babel-runtime "6.x.x"
+
 react-p5@^1.3.33:
   version "1.3.33"
   resolved "https://registry.yarnpkg.com/react-p5/-/react-p5-1.3.33.tgz#981af17692a9b90ffc4e10be56d9f6e54de41fab"
@@ -9848,6 +9882,11 @@ regenerate@^1.4.0:
   version "1.4.2"
   resolved "https://registry.yarnpkg.com/regenerate/-/regenerate-1.4.2.tgz#b9346d8827e8f5a32f7ba29637d398b69014848a"
   integrity sha512-zrceR/XhGYU/d/opr2EKO7aRHUeiBI8qjtfHqADTwZd6Szfy16la6kqD0MIUs5z5hx6AaKa+PixpPrR289+I0A==
+
+regenerator-runtime@^0.11.0:
+  version "0.11.1"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
+  integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
 
 regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
   version "0.13.7"
@@ -10608,6 +10647,11 @@ stackframe@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/stackframe/-/stackframe-1.2.0.tgz#52429492d63c62eb989804c11552e3d22e779303"
   integrity sha512-GrdeshiRmS1YLMYgzF16olf2jJ/IzxXY9lhKOskuVziubpTYcYqyOwYeJKzQkwy7uN0fYSsbsC4RQaXf9LCrYA==
+
+stage-js@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.yarnpkg.com/stage-js/-/stage-js-0.9.4.tgz#5d31eb8f33f1ca8d21c2043c6d21e47794b715f5"
+  integrity sha512-fNN6rkYD55T4NUxJE71hixXYS9DoyHVX5S8sQcq5yiozX1kqHP/wnByZwFfdAGNZjb5rROJ90zwb0EbM9U2Jqg==
 
 state-toggle@^1.0.0:
   version "1.0.3"
